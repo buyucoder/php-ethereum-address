@@ -32,22 +32,22 @@ class Address
         }
     }
 
-    public function getPrivateKey()
+    public function getPrivateKey($prefix = true)
     {
-        return '0x' . gmp_strval($this->privateKey->getSecret(), 16);
+        return ($prefix ? '0x' : '') . gmp_strval($this->privateKey->getSecret(), 16);
     }
 
-    public function getPublicKey()
+    public function getPublicKey($prefix = true)
     {
         $publicKey = $this->privateKey->getPublicKey();
         $publicKeySerializer = new DerPublicKeySerializer(EccFactory::getAdapter());
-        return '0x' . substr($publicKeySerializer->getUncompressedKey($publicKey), 2);
+        return ($prefix ? '0x' : '') . substr($publicKeySerializer->getUncompressedKey($publicKey), 2);
     }
 
-    public function get()
+    public function get($prefix = true)
     {
-        $hash = Keccak::hash(hex2bin($this->getPublicKey()), 256);
-        return '0x' . substr($hash, -40);
+        $hash = Keccak::hash(hex2bin($this->getPublicKey(false)), 256);
+        return ($prefix ? '0x' : '') . substr($hash, -40);
     }
 
     /**
