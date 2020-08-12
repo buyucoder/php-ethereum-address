@@ -2,7 +2,7 @@
 
 
 ```lang=bash
-$ composer require kornrunner/ethereum-address
+$ composer require buyucoder/ethereum-address
 ```
 
 ## Usage
