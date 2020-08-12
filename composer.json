@@ -1,11 +1,11 @@
 {
-    "name": "kornrunner/ethereum-address",
-    "description": "Pure PHP Ethereum Address Generator / Validator",
+    "name": "buyucoder/ethereum-address",
+    "description": "Pure PHP Ethereum Address Generator / Validator with PHP 5.6+ support",
     "type": "library",
     "require": {
-        "php": ">=7.2",
-        "kornrunner/keccak": "^1.0",
-        "mdanter/ecc": "^0.5"
+        "php": ">=5.6",
+        "olegabr/keccak": "^1.0.4",
+        "mdanter/ecc": "^0.4.7"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.2"
