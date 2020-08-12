@@ -17,6 +17,9 @@ class Address
         if (empty ($privateKey)) {
             $this->privateKey = $generator->createPrivateKey();
         } else {
+            if (substr($privateKey, 0, 2) == '0x') {
+                $privateKey = substr($privateKey, 2);
+            }
             if (!ctype_xdigit($privateKey)) {
                 throw new InvalidArgumentException('Private key must be a hexadecimal number');
             }
