@@ -34,20 +34,20 @@ class Address
 
     public function getPrivateKey()
     {
-        return gmp_strval($this->privateKey->getSecret(), 16);
+        return '0x' . gmp_strval($this->privateKey->getSecret(), 16);
     }
 
     public function getPublicKey()
     {
         $publicKey = $this->privateKey->getPublicKey();
         $publicKeySerializer = new DerPublicKeySerializer(EccFactory::getAdapter());
-        return substr($publicKeySerializer->getUncompressedKey($publicKey), 2);
+        return '0x' . substr($publicKeySerializer->getUncompressedKey($publicKey), 2);
     }
 
     public function get()
     {
         $hash = Keccak::hash(hex2bin($this->getPublicKey()), 256);
-        return substr($hash, -40);
+        return '0x' . substr($hash, -40);
     }
 
     /**
