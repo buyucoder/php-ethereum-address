@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 
 namespace kornrunner\Ethereum;
 
@@ -8,9 +8,11 @@ use Mdanter\Ecc\EccFactory;
 use Mdanter\Ecc\Crypto\Key\PrivateKeyInterface;
 use Mdanter\Ecc\Serializer\PublicKey\DerPublicKeySerializer;
 
-class Address {
+class Address
+{
 
-    public function __construct(string $privateKey = '') {
+    public function __construct($privateKey = '')
+    {
         $generator = EccFactory::getSecgCurves()->generator256k1();
         if (empty ($privateKey)) {
             $this->privateKey = $generator->createPrivateKey();
@@ -27,17 +29,20 @@ class Address {
         }
     }
 
-    public function getPrivateKey(): string {
+    public function getPrivateKey()
+    {
         return gmp_strval($this->privateKey->getSecret(), 16);
     }
 
-    public function getPublicKey(): string {
+    public function getPublicKey()
+    {
         $publicKey = $this->privateKey->getPublicKey();
         $publicKeySerializer = new DerPublicKeySerializer(EccFactory::getAdapter());
         return substr($publicKeySerializer->getUncompressedKey($publicKey), 2);
     }
 
-    public function get(): string {
+    public function get()
+    {
         $hash = Keccak::hash(hex2bin($this->getPublicKey()), 256);
         return substr($hash, -40);
     }
